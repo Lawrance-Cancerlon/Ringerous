@@ -6,7 +6,6 @@ class TestRingProperties(unittest.TestCase):
 
     # Assert testing for set Z_n where 1 <= n <= 99
     def test_modulo_ring_properties(self):
-
         for n in range(1, 100):
             r = Ring(modulo = n)
             results = check_all_properties(r)
@@ -39,8 +38,6 @@ class TestRingProperties(unittest.TestCase):
         self.assertTrue(results['Additive Identity']['result'])
         self.assertTrue(results['Additive Inverse']['result'])
         self.assertTrue(results['Distributivity']['result'])
-
-        # This custom ring has '1' as multiplicative identity
         self.assertTrue(results['Multiplicative Identity']['result'])
 
 if __name__ == '__main__':

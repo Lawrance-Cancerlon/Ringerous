@@ -16,7 +16,7 @@ def check_identity(ring, op_name):
 
 def check_inverse(ring):
     for a in ring.elements:
-        if not any(ring.add(a, b) == ring.elements[0] for b in ring.elements):  # assuming 0 is first
+        if not any(ring.add(a, b) == ring.elements[0] for b in ring.elements):
             return False, a
     return True, None
 
