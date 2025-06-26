@@ -55,7 +55,3 @@ You can Export the result in a CSV or TXT file.
 ## Contribute
 
 Go ahead make something useful tho.
-<<<<<<< HEAD
->>>>>>> Stashed changes
-=======
->>>>>>> c149cd171fa90de94b0492d236cdce6714942a09
