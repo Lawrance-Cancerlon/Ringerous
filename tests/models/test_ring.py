@@ -1,5 +1,6 @@
 import unittest
-from models.ring import Ring
+from shared.models.Ring import Ring
+from shared.exceptions.ValidationException import ValidationException
 
 class TestRing(unittest.TestCase):
     def test_modulo_addition(self):
@@ -52,8 +53,18 @@ class TestRing(unittest.TestCase):
 
     # Assert test that module Ring should arise exceptionn if modulo is not a natural number
     def test_n_is_not_natural(self):
-        n = 0
-        self.assertRaises(Exception, Ring, modulo = n)
+        self.assertRaises(ValidationException, Ring, modulo = 0)
+
+    # Assert test for table that are not N x N for N is the number of elements in set
+    def test_different_matrix_size(self):
+        elements = ['0', '1']
+        addition = [
+            ['0', '1']
+        ]
+        multiplication = [
+            ['1', '1'], ['1', '0']
+        ]
+        self.assertRaises(ValidationException, Ring, elements = elements, add_table = addition, mul_table = multiplication)
 
 if __name__ == '__main__':
     unittest.main()
