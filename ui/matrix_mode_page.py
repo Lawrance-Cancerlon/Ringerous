@@ -1,9 +1,10 @@
 import tkinter as tk
-from shared.models import Ring
+from shared.models.Ring import Ring
 from ui.components.array_input import ArrayInput
 from ui.components.button import Button
 from ui.components.label import Label
-import modules.checker import Checker
+import modules.checker as Checker
+from ui.components.table_input import TableInput
 
 class MatrixInputPage(tk.Frame):
     def __init__(self, parent, on_submit):
@@ -24,13 +25,17 @@ class MatrixInputPage(tk.Frame):
         frame_input_size.pack()
 
 
-        self.frame = tk.Frame(self, bg="#e0e0e0")
-        self.frame.pack(fill = "both", expand = True, padx = 12, pady = 12)
-        self.frame.pack_propagate(False)
-        self.rows = self.cols = self.size_var.get()
-        self.entries = []
+        addition_frame = tk.Frame(self)
+        Label(addition_frame, "Addition operation").pack()
+        self.addition_table = TableInput(addition_frame)
+        self.addition_table.pack()
+        addition_frame.pack()
 
-        self._draw_matrix()
+        multiplication_frame = tk.Frame(self)
+        Label(multiplication_frame, "Multiplication operation").pack()
+        self.multiplication_table = TableInput(multiplication_frame)
+        self.multiplication_table.pack()
+        multiplication_frame.pack()
 
         submit = Button(self, text = "Check", command = self._on_submit)
         submit.pack(fill="x", padx = 4, pady = 4)
@@ -38,54 +43,23 @@ class MatrixInputPage(tk.Frame):
 
 
     def _on_submit(self):
-        ring = Ring(elements = self.elements, mul)
+        addition = self.addition_table.get_matrix()
+        multiplication = self.multiplication_table.get_matrix()
+
+        ring = Ring(elements = self.elements, mul_table = multiplication, add_table = addition)
+        results = Checker.check_all_properties(ring)
+
+        self.on_submit(results)
+
+
 
         pass
 
     def _on_elements(self, value) -> None:
         length = value.__len__()
         self.elements = value
-
-        self.rows = self.cols = length
-        self._draw_matrix()
-
-
-    def _on_resize(self):
-        try:
-            new_size = int(self.size_var.get())
-            if new_size > 0:
-                self.rows = self.cols = new_size
-                self._draw_matrix()
-        except ValueError:
-            pass
+        print(self.elements)
+        self.addition_table.resize(length)
+        self.multiplication_table.resize(length)
 
 
-    def _draw_matrix(self):
-        for widget in self.frame.winfo_children():
-            widget.destroy()
-        self.entries = []
-
-        for i in range(50):  # arbitrary max
-            self.frame.grid_rowconfigure(i, weight=0)
-            self.frame.grid_columnconfigure(i, weight=0)
-
-        for r in range(self.rows):
-            self.frame.grid_rowconfigure(r, weight=1)
-            row_entries = []
-            for c in range(self.cols):
-                self.frame.grid_columnconfigure(c, weight=1)
-                entry = tk.Entry(self.frame, justify="center")
-                
-                entry.grid(row=r, column=c, padx=4, pady=4)
-                entry.configure(width=4)  # approx character width; actual size also depends on font
-                row_entries.append(entry)
-            self.entries.append(row_entries)
-
-
-
-    def update_size(self, new_size):
-        self.cols = self.rows = new_size
-        self._draw_matrix()
-
-    def get_matrix(self):
-        return [[entry.get() for entry in row] for row in self.entries]

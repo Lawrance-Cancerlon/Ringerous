@@ -13,7 +13,7 @@ class ArrayInput(tk.Frame):
         self.entry.pack(fill="x", expand=True)
 
 
-    def get(self, value_type=int):
+    def get(self, value_type=str):
         raw = self.var.get()
         try:
             return [value_type(item.strip()) for item in raw.split(",") if item.strip() != ""]
