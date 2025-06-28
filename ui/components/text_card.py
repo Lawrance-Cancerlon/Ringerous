@@ -36,13 +36,20 @@ class TextCard(tk.Frame):
 
             label = tk.Label(
                 self._line_frame,
-                text=key,
+                text = key,
                 anchor="center",
-                justify="center",
+                justify="left",
                 bg=self["background"]
                 
             )
-            print(value)
+
+            counterexample = tk.Label(
+                self._line_frame,
+                text = '\t' + (value['counterexample'] if value['counterexample'] else "no counterexample defined"),
+                anchor = "center",
+                justify = "left",
+                bg = self['background']
+            )
 
             if value['result'] == True:
                 label['text'] = '✅ ' + key
@@ -53,4 +60,6 @@ class TextCard(tk.Frame):
                 label['fg'] = 'red'
 
             label.pack(anchor="center", pady=2, fill="x")
+            counterexample.pack(anchor="center", pady = 2)
             self._line_widgets.append(label)
+            self._line_widgets.append(counterexample)

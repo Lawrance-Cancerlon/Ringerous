@@ -27,7 +27,7 @@ class Index(tk.Frame):
     def _left_panel(self, parent) -> None:
         self.panel_left = FlexContainer(parent, direction = "column", gap = 8)
 
-        self.title = tk.Label(self.panel_left, text = "Ringorous | Check your rings for rings")
+        self.title = tk.Label(self.panel_left, text = "Ringerous | Check your rings for rings")
         self.title.pack(pady = 12)
 
         self.notebook = ttk.Notebook(self.panel_left)
