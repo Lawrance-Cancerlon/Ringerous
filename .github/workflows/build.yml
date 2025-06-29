@@ -1,12 +1,15 @@
-name: Build to Windows
-
+name: Build
 on:
   push:
     tags:
       - "*"
+permissions:
+  contents: read # No need to write since we’re not creating a release
+  actions: write # Required to upload artifacts
 
 jobs:
   build-windows:
+    name: Build EXE (Windows)
     runs-on: windows-latest
 
     steps:
@@ -20,14 +23,46 @@ jobs:
       - name: Install dependencies
         run: pip install pyinstaller
 
-      - name: Build .exe with PyInstaller
-        run: pyinstaller --onefile --windowed --name Ringerous --icon=assets/icon.ico app.py
-
-      - name: Copy README.md
-        run: copy README.md dist\README.md
+      - name: Build EXE
+        run: python package.py exe
 
       - name: Upload .exe as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: build-${{ github.ref_name }}
-          path: dist/**
+          name: Ringerous-EXE-${{ github.ref_name }}
+          path: |
+            dist/Ringerous-*.exe
+            dist/README.md
+
+  build-linux:
+    name: Build AppImage (Linux)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y python3-tk
+          pip install pyinstaller
+
+      - name: Download appimagetool
+        run: |
+          wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -O appimagetool
+          chmod +x appimagetool
+          echo "$(pwd)" >> $GITHUB_PATH
+
+      - name: Build AppImage
+        run: ./appimagetool && python package.py appimage
+
+      - name: Upload AppImage as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Ringerous-AppImage-${{ github.ref_name }}
+          path: Ringerous-*.AppImage
