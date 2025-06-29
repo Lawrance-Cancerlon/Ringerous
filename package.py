@@ -7,7 +7,7 @@ from pathlib import Path
 VERSION = "1.0.1"
 APP_NAME = f"Ringerous-{VERSION}"
 ENTRY_POINT = "app.py"
-ICON_PATH = "assets/app.ico"
+ICON_PATH = "assets/icon.ico"
 README_PATH = "README.md"
 DIST_DIR = Path("dist")
 
