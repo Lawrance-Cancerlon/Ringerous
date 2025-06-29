@@ -1,0 +1,7 @@
+Filename,Property,Result,Counterexample
+/home/wakugumi/Project/Ringerous/presets/ring1.json,Additive Associativity,True,
+/home/wakugumi/Project/Ringerous/presets/ring1.json,Multiplicative Associativity,True,
+/home/wakugumi/Project/Ringerous/presets/ring1.json,Additive Identity,True,
+/home/wakugumi/Project/Ringerous/presets/ring1.json,Additive Inverse,True,
+/home/wakugumi/Project/Ringerous/presets/ring1.json,Multiplicative Identity,True,
+/home/wakugumi/Project/Ringerous/presets/ring1.json,Distributivity,True,

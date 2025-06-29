@@ -3,12 +3,17 @@ import csv
 from shared.models.Ring import Ring
 
 def import_rings(paths):
+    """
+    Returns path, rings.
+        """
     rings = []
+    pathss = []
     for path in paths:
         with open(path) as f:
             data = json.load(f)
         rings.append(Ring(elements=data['elements'], add_table=data['add_table'], mul_table=data['mul_table']))
-    return rings
+        pathss.append(path)
+    return pathss, rings
 
 def export_single_result(results, path):
     with open(path, 'w', newline='') as f:
@@ -18,7 +23,7 @@ def export_single_result(results, path):
         for prop, result in results.items():
             writer.writerow([
                 prop,
-                result['result'],
+                str(result['result']),
                 result['counterexample'] if not result["result"] else ""
             ])
         
@@ -32,6 +37,6 @@ def export_batch_results(results, path):
                 writer.writerow([
                     filename,
                     prop,
-                    result['result'],
+                    str(result['result']),
                     result['counterexample'] if not result["result"] else ""
                 ])
