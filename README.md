@@ -7,7 +7,9 @@ Simple, minimal, and lightweight app to test some set for satisfying Ring proper
 ## Features
 
 You can test for modulo integers with our "Modulo Integer Mode".
+
 You can set up custom binary operations with our "Custom Binary Table Mode".
+
 You can also process a batch by loading files and export the result as CSV with our "Batch Process Mode".
 
 ## Who wrote this crap
