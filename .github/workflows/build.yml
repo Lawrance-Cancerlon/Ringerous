@@ -59,7 +59,7 @@ jobs:
           echo "$(pwd)" >> $GITHUB_PATH
 
       - name: Build AppImage
-        run: ./appimagetool && python package.py appimage
+        run: python package.py appimage
 
       - name: Upload AppImage as artifact
         uses: actions/upload-artifact@v4
