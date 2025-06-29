@@ -4,7 +4,7 @@ import os
 import sys
 from pathlib import Path
 
-VERSION = "1.0.1"
+VERSION = "1.0.2"
 APP_NAME = f"Ringerous-{VERSION}"
 ENTRY_POINT = "app.py"
 ICON_PATH = "assets/icon.ico"
