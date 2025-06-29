@@ -62,7 +62,7 @@ Categories=Utility;
 """)
 
     # Icon (should be PNG, not ICO)
-    shutil.copy("assets/app.png", APPDIR / "app.png")
+    shutil.copy("assets/icon.png", APPDIR / "icon.png")
 
     # Run appimagetool
     print("Packaging AppImage...")
