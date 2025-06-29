@@ -12,7 +12,7 @@ README_PATH = "README.md"
 DIST_DIR = Path("dist")
 
 def build_exe():
-    print("📦 Building Windows .exe...")
+    print("Building Windows .exe...")
     subprocess.run([
         "pyinstaller",
         "--onefile",
@@ -23,11 +23,11 @@ def build_exe():
     ], check=True)
 
     shutil.copy(README_PATH, DIST_DIR / "README.md")
-    print(f"✅ EXE built: {DIST_DIR / f'{APP_NAME}.exe'}")
+    print(f"EXE built: {DIST_DIR / f'{APP_NAME}.exe'}")
 
 
 def build_appimage():
-    print("📦 Building Linux AppImage...")
+    print("Building Linux AppImage...")
 
     APPDIR = Path("AppDir")
     BIN_PATH = APPDIR / "usr/bin"
@@ -65,10 +65,10 @@ Categories=Utility;
     shutil.copy("assets/app.png", APPDIR / "app.png")
 
     # Run appimagetool
-    print("🛠️ Packaging AppImage...")
+    print("Packaging AppImage...")
     subprocess.run(["appimagetool", str(APPDIR), f"{APP_NAME}.AppImage"], check=True)
 
-    print(f"✅ AppImage built: ./{APP_NAME}.AppImage")
+    print(f"AppImage built: ./{APP_NAME}.AppImage")
 
 
 if __name__ == "__main__":
