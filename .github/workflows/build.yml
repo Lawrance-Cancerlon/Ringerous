@@ -52,10 +52,12 @@ jobs:
           sudo apt install -y python3-tk
           pip install pyinstaller
 
-      - name: Download appimagetool
+      - name: Download and extract appimagetool
         run: |
           wget https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage -O appimagetool
           chmod +x appimagetool
+          ./appimagetool --appimage-extract
+          mv squashfs-root/appimagetool appimagetool-extracted
           echo "$(pwd)" >> $GITHUB_PATH
 
       - name: Build AppImage

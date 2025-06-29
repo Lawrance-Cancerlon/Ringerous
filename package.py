@@ -66,8 +66,14 @@ Categories=Utility;
 
     # Run appimagetool
     print("Packaging AppImage...")
-    subprocess.run(["appimagetool", str(APPDIR), f"{APP_NAME}.AppImage"], check=True)
+    APPIMAGETOOL_PATH = "./appimagetool-extracted"
 
+    subprocess.run([
+        APPIMAGETOOL_PATH,
+        "--no-appstream",
+        str(APPDIR),
+        f"{APP_NAME}.AppImage"
+    ], check=True)
     print(f"AppImage built: ./{APP_NAME}.AppImage")
 
 
