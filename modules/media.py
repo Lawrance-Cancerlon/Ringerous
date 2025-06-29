@@ -18,7 +18,7 @@ def export_single_result(results, path):
         for prop, result in results.items():
             writer.writerow([
                 prop,
-                result['result'],
+                str(result['result']),
                 result['counterexample'] if not result["result"] else ""
             ])
         
@@ -32,6 +32,6 @@ def export_batch_results(results, path):
                 writer.writerow([
                     filename,
                     prop,
-                    result['result'],
+                    str(result['result']),
                     result['counterexample'] if not result["result"] else ""
                 ])

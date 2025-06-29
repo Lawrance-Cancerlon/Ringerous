@@ -12,7 +12,7 @@ class ModuloModePage(tk.Frame):
         super().__init__(parent)
         self.var = tk.IntVar(value = 1)
 
-        self.latex_label = LatexLabel(self, latex_fn = lambda: rf"$ℤ_{self.var.get()}$")
+        self.latex_label = LatexLabel(self, latex_fn = lambda: rf"$ℤ_{{{self.var.get()}}}$")
         self.latex_label.pack(pady = 12)
 
         tk.Label(self, text="Enter modulo number: ").pack(pady=(10, 0));
