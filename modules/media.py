@@ -4,11 +4,13 @@ from shared.models.Ring import Ring
 
 def import_rings(paths):
     rings = []
+    pathss = []
     for path in paths:
         with open(path) as f:
             data = json.load(f)
         rings.append(Ring(elements=data['elements'], add_table=data['add_table'], mul_table=data['mul_table']))
-    return rings
+        pathss.append(path)
+    return pathss, rings
 
 def export_single_result(results, path):
     with open(path, 'w', newline='') as f:

@@ -15,6 +15,7 @@ class BatchModePage(tk.Frame):
 
         self.rings = []
         self.messages = {}
+        self.result = {}
 
         self.on_message = on_message
 
@@ -38,13 +39,13 @@ class BatchModePage(tk.Frame):
     def _handle_import(self):
         dir = filedialog.askopenfilenames()
 
-        self.rings = Media.import_rings(dir)
+        self.paths, self.rings = Media.import_rings(dir)
         self.message = {}
 
         for x, ring in enumerate(self.rings):
 
-            self.result = Checker.check_all_properties(ring)
-            boolean = [el['result'] for el in self.result.values()]
+            self.result[self.paths[x]] = Checker.check_all_properties(ring)
+            boolean = [el for el in self.result.values()]
             self.message[f"Ring {x}"]= {
                 "result" : all(boolean),
                 "counterexample": "Rings are loaded and checked" if all(boolean) else "Some properties not satisfied"
@@ -53,7 +54,7 @@ class BatchModePage(tk.Frame):
 
 
     def _destination_dialog(self):
-        dir = filedialog.asksaveasfilename()
+        dir = filedialog.asksaveasfilename(defaultextension=".csv", initialfile="export")
 
         try:
             Media.export_batch_results(self.result, dir)
