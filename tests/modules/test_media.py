@@ -26,7 +26,7 @@ class TestMedia(unittest.TestCase):
         json_content = json.dumps(ring)
         with patch('builtins.open', mock_open(read_data=json_content)):
             with patch('json.load', return_value=ring):
-                rings = import_rings(['ring.json'])
+                _, rings = import_rings(['ring.json'])
                 self.assertEqual(len(rings), 1)
                 self.assertIsInstance(rings[0], Ring)
                 self.assertEqual(rings[0].elements, ['a', 'b', 'c'])
@@ -60,7 +60,7 @@ class TestMedia(unittest.TestCase):
         json_content_2 = json.dumps(ring_2)
         with patch('builtins.open', mock_open(read_data=json_content_1)), patch('builtins.open', mock_open(read_data=json_content_2)):
             with patch('json.load', side_effect=[ring_1, ring_2]):
-                rings = import_rings(['ring1.json', 'ring2.json'])
+                _, rings = import_rings(['ring1.json', 'ring2.json'])
                 self.assertEqual(len(rings), 2)
                 self.assertIsInstance(rings[0], Ring)
                 self.assertIsInstance(rings[1], Ring)
@@ -68,7 +68,7 @@ class TestMedia(unittest.TestCase):
                 self.assertEqual(rings[1].elements, ['x', 'y'])
 
     def test_import_rings_empty_list(self):
-        rings = import_rings([])
+        paths, rings = import_rings([])
         self.assertEqual(len(rings), 0)
         self.assertEqual(rings, [])
 

@@ -3,6 +3,9 @@ import csv
 from shared.models.Ring import Ring
 
 def import_rings(paths):
+    """
+    Returns path, rings.
+        """
     rings = []
     pathss = []
     for path in paths:
