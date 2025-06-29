@@ -23,7 +23,7 @@ It's an assessment on our Ring theory class.
 
 ## How to use this
 
-![Figure 1 - User Interface of the program.](./assets/logo.png)
+![Figure 1 - User Interface of the program.](./assets/figure_1.png)
 
 In the figure above is our app's user interface, the first thing you'll see when launch. The app will look like it throughout any kind of task use on it.
 The left pane which has white background is the output message pane. Any error log or result will display on it.
@@ -42,7 +42,7 @@ In the `Elements` input field, you get to input your set's elements. The matrix 
 1, 2, 3 # use comma as the seperator
 ```
 
-![Figure 2 - Testing for an invalid ring.](./assets/logo.png)
+![Figure 2 - Testing for an invalid ring.](./assets/figure_2.png)
 
 ### Batch Process mode
 
